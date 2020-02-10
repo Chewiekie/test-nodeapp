@@ -5,7 +5,7 @@ require('dotenv').config()
 
 const prompt_attributes = [{
   name: 'githubUser',
-}]
+}];
 
 const github = 'https://github.com/';
 const webhookURL = `https://hooks.slack.com/services/TSVDQ330U/BTUD8J754/${process.env.TOKEN}`;
