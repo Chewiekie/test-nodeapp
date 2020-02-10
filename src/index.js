@@ -1,8 +1,7 @@
 const puppeteer = require('puppeteer')
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');
 const prompt = require('prompt')
 require('dotenv').config()
-
 const prompt_attributes = [{
   name: 'githubUser',
 }];
