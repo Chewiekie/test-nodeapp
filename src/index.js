@@ -1,8 +1,7 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer')
 const fetch = require('node-fetch');
-const prompt = require('prompt');
-require('dotenv').config();
-
+const prompt = require('prompt')
+require('dotenv').config()
 const prompt_attributes = [{
   name: 'githubUser',
 }];
@@ -63,6 +62,6 @@ prompt.get(prompt_attributes, (err, result) => {
     console.log('Start PageToScreenshot()');
     pageToScreenshot(user);
   }
-});
+})
 
-prompt.start();
+prompt.start()
