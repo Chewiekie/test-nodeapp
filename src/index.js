@@ -1,27 +1,27 @@
-const puppeteer = require('puppeteer');
-const fetch = require('node-fetch');
-const prompt = require('prompt');
-require('dotenv').config();
+const puppeteer = require('puppeteer')
+const fetch = require('node-fetch')
+const prompt = require('prompt')
+require('dotenv').config()
 
 const prompt_attributes = [{
   name: 'githubUser',
 }];
 
-const github = 'https://github.com/';
-const webhookURL = `https://hooks.slack.com/services/TSVDQ330U/BTUD8J754/${process.env.TOKEN}`;
+const github = 'https://github.com/'
+const webhookURL = `https://hooks.slack.com/services/TSVDQ330U/BTUD8J754/${process.env.TOKEN}`
 
 const pageToScreenshot = async (githubUser) => {
   console.log('Launch Puppeteer');
   const time = new Date().getTime();
   const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+  const page = await browser.newPage()
 
   await page.goto(`${github}/${githubUser}`);
   await page.screenshot({ path: `src/images/${time}-${githubUser}.png` });
   const githubCounter = await page.evaluate(() => document.getElementsByClassName('Counter')[0].innerText);
   const githubUserPhoto = await page.evaluate(() => document.getElementsByClassName('avatar-before-user-status')[0].src);
   postToSlack(githubUser, githubUserPhoto, githubCounter);
-  await browser.close();
+  await browser.close()
 };
 
 const postToSlack = async (user, photo, count) => {
@@ -40,7 +40,7 @@ const postToSlack = async (user, photo, count) => {
         },
       },
     ],
-  });
+  })
   await fetch(webhookURL, {
     method: 'POST',
     headers: {
@@ -49,8 +49,8 @@ const postToSlack = async (user, photo, count) => {
     body: data,
   }).then((response) => {
     console.log(JSON.stringify(response));
-  });
-};
+  })
+}
 
 prompt.get(prompt_attributes, (err, result) => {
   if (err) {
@@ -63,6 +63,6 @@ prompt.get(prompt_attributes, (err, result) => {
     console.log('Start PageToScreenshot()');
     pageToScreenshot(user);
   }
-});
+})
 
-prompt.start();
+prompt.start()
