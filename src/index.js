@@ -1,14 +1,12 @@
-const puppeteer = require('puppeteer');
-const fetch = require('node-fetch');
-const prompt = require('prompt');
-require('dotenv').config();
-
+const puppeteer = require('puppeteer')
+const fetch = require('node-fetch')
+const prompt = require('prompt')
+require('dotenv').config()
 const prompt_attributes = [{
   name: 'githubUser',
 }];
-
-const github = 'https://github.com/';
-const webhookURL = `https://hooks.slack.com/services/TSVDQ330U/BTUD8J754/${process.env.TOKEN}`;
+const github = 'https://github.com/'
+const webhookURL = `https://hooks.slack.com/services/TSVDQ330U/BTUD8J754/${process.env.TOKEN}`
 
 const pageToScreenshot = async (githubUser) => {
   console.log('Launch Puppeteer');
@@ -50,7 +48,7 @@ const postToSlack = async (user, photo, count) => {
   }).then((response) => {
     console.log(JSON.stringify(response));
   });
-};
+}
 
 prompt.get(prompt_attributes, (err, result) => {
   if (err) {
@@ -63,6 +61,6 @@ prompt.get(prompt_attributes, (err, result) => {
     console.log('Start PageToScreenshot()');
     pageToScreenshot(user);
   }
-});
+})
 
-prompt.start();
+prompt.start()
